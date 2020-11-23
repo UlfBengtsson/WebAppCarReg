@@ -1,0 +1,24 @@
+﻿@model List<Car>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<a asp-action="Create">Add Car to list</a>
+
+<table>
+    <tr>
+        <td>Brand</td>
+        <td>Model</td>
+        <td>Year</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Brand</td>
+            <td>@item.ModelName</td>
+            <td>@item.Year</td>
+        </tr>
+    }
+</table>
