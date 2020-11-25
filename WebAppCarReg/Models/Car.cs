@@ -10,7 +10,25 @@ namespace WebAppCarReg.Models
         public int Id { get; set; }
         public string Brand { get; set; }
         public string ModelName { get; set; }
-        public int Year { get; set; }
+        int year;
+        public int Year 
+        {
+            get
+            {
+                return year;
+            }
+            set
+            {
+                if (value >= 1886)
+                {
+                    year = value;
+                }
+                else
+                {
+                    throw new Exception("Worlds first car was made 1886.");
+                }
+            } 
+        }
 
         public Car() {}
 
@@ -19,6 +37,7 @@ namespace WebAppCarReg.Models
             Brand = brand;
             ModelName = modelName;
             Year = year;
+            //this.year = year;//bad way, this dose not check the year and dosent throw the exception.
         }
 
         public Car(int id, string brand, string modelName, int year) : this(brand,modelName,year)

@@ -12,7 +12,7 @@ namespace WebAppCarReg.Models.Data
 
         public Car Create(string brand, string modelName, int year)
         {
-            Car car = new Car() { Id = ++idCounter, Brand = brand, ModelName = modelName, Year = year };
+            Car car = new Car( ++idCounter, brand,  modelName,  year );
             carsList.Add(car);
             return car;
         }

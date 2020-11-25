@@ -18,7 +18,7 @@ namespace WebAppCarReg.Models
         public string ModelName { get; set; }
 
         [Display(Name = "Production Year")]
-        [Range(1500, 2025)]
+        [Range(1886, 2025)]
         public int Year { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<Car>
+﻿@model CarIndexViewmodel
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,11 +7,44 @@
 
 <a asp-action="Create">Add Car to list</a>
 
-<table>
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            <form asp-action="Index" method="post">
+                <h4>Search based on years range</h4>
+
+                <label asp-for="AfterYear"></label>
+                <input asp-for="AfterYear" />
+
+                <label asp-for="BeforeYear"></label>
+                <input asp-for="BeforeYear" />
+
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>Brand</h3>
+            </div>
+            <div class="col">
+                <h3>Model</h3>
+            </div>
+            <div class="col">
+                <h3>Year</h3>
+            </div>
+        </div>
+        @foreach (var item in Model.CarList)
+        {
+            <partial name="_CarPartialView" model="item" />
+        }
+    </div>
+</div>
+
+@*<table>
     <tr>
-        <td>Brand</td>
-        <td>Model</td>
-        <td>Year</td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
     @foreach (var item in Model)
     {
@@ -21,4 +54,4 @@
             <td>@item.Year</td>
         </tr>
     }
-</table>
+</table>*@
