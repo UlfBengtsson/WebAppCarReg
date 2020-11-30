@@ -13,7 +13,7 @@
         <h3>Last car added</h3>
         @if (Model != null)
         {
-            <partial name="_CarPartialView" model="Model"/>
+            <partial name="_CarPartialView" model="Model" />
         }
         else
         {
@@ -21,3 +21,31 @@
         }
     </div>
 </div>
+<div class="row">
+    <div class="col-12">
+        <h3>Look up a Car by it id</h3>
+        <input type="number" id="carIdInput" value="1" />
+        <a class="btn btn-info"
+           asp-controller="Cars" 
+           asp-action="AjaxFindById" 
+           data-target="enviroment-container" 
+           onclick="findById(event)"
+           >Find by id</a>
+
+        <div id="enviroment-container"></div>
+    </div>
+</div>
+<script>
+    function findById(event) {
+        console.log(event);
+        event.preventDefault();
+        const anchorElement = event.target;
+        const inputIdValue = $("#carIdInput").val();
+
+        $.get(anchorElement.attributes.href.value + "/" +  inputIdValue, function (result) {
+
+            $('#' + anchorElement.attributes["data-target"].value).html(result);
+
+        });
+    };
+</script>

@@ -9,6 +9,7 @@ namespace WebAppCarReg.Models.Services
     public class CarService : ICarService
     {
         ICarsRepo _carsRepo = new InMemoryCarRepo();
+
         public Car Add(CreateCarViewModel createCarViewModel)
         {
             return _carsRepo.Create(createCarViewModel.Brand, createCarViewModel.ModelName, createCarViewModel.Year);

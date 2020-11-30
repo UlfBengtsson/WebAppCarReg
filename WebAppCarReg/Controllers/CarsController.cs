@@ -68,5 +68,36 @@ namespace WebAppCarReg.Controllers
             return View(carViewModel);
         }
 
+        public IActionResult Delete(int id)
+        {
+            if (_carService.Remove(id))
+            {
+                ViewBag.msg = "Car was removed.";
+            }
+            else
+            {
+                ViewBag.msg = "Unable to remove car with id: " + id;
+            }
+
+            CarIndexViewmodel indexViewmodel = new CarIndexViewmodel();
+
+            indexViewmodel.CarList = _carService.All();
+
+            return View("Index", indexViewmodel);
+        }
+
+        public IActionResult AjaxFindById(int id)
+        {
+            Car car = _carService.FindBy(id);
+
+            if (car == null)
+            {
+                return NotFound();//404
+            }
+            else
+            {
+                return PartialView("_CarPartialView", car);
+            }
+        }
     }
 }

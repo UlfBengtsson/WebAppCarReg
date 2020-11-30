@@ -3,7 +3,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Cars Index</h1>
+
+@if (ViewBag.msg != null)
+{
+    <h3>@ViewBag.msg</h3>
+}
 
 <a asp-action="Create">Add Car to list</a>
 
@@ -32,6 +37,9 @@
             <div class="col">
                 <h3>Year</h3>
             </div>
+            <div class="col">
+                <h3>Action</h3>
+            </div>
         </div>
         @foreach (var item in Model.CarList)
         {
@@ -39,19 +47,3 @@
         }
     </div>
 </div>
-
-@*<table>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Brand</td>
-            <td>@item.ModelName</td>
-            <td>@item.Year</td>
-        </tr>
-    }
-</table>*@
