@@ -26,28 +26,12 @@
         <h3>Look up a Car by it id</h3>
         <input type="number" id="carIdInput" value="1" />
         <a class="btn btn-info"
-           asp-controller="Cars" 
-           asp-action="AjaxFindById" 
-           data-target="enviroment-container" 
-           onclick="findById(event, '@Url.Action("AjaxFindById","Cars")')"
-           >Find by id</a>
-        
+           asp-controller="Cars"
+           asp-action="AjaxFindById"
+           data-target="enviroment-container"
+           onclick="findById(event, '@Url.Action("AjaxFindById","Cars")')">Find by id</a>
+
         <div id="enviroment-container"></div>
     </div>
 </div>
-<script>
-    function findById(event, urlHelper) {
-        console.log(urlHelper);
-        event.preventDefault();
-        const anchorElement = event.target;
-        const inputIdValue = $("#carIdInput").val();
-
-        $.get(anchorElement.attributes.href.value + "/" +  inputIdValue, function (result) {
-
-            $('#' + anchorElement.attributes["data-target"].value).html(result);
-
-        }).fail(function () {
-            alert("Car with this Id: " + inputIdValue + " was not found");
-        });
-    };
-</script>
+<script src="~/js/CarsUtil.js" asp-append-version="true"></script>
