@@ -29,15 +29,15 @@
            asp-controller="Cars" 
            asp-action="AjaxFindById" 
            data-target="enviroment-container" 
-           onclick="findById(event)"
+           onclick="findById(event, '@Url.Action("AjaxFindById","Cars")')"
            >Find by id</a>
-
+        
         <div id="enviroment-container"></div>
     </div>
 </div>
 <script>
-    function findById(event) {
-        console.log(event);
+    function findById(event, urlHelper) {
+        console.log(urlHelper);
         event.preventDefault();
         const anchorElement = event.target;
         const inputIdValue = $("#carIdInput").val();
@@ -46,6 +46,8 @@
 
             $('#' + anchorElement.attributes["data-target"].value).html(result);
 
+        }).fail(function () {
+            alert("Car with this Id: " + inputIdValue + " was not found");
         });
     };
 </script>
