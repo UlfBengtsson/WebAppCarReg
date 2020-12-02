@@ -1,7 +1,6 @@
 ﻿
 
-function findById(event, urlHelper) {
-    console.log(urlHelper);
+function findById(event) {
     event.preventDefault();
     const anchorElement = event.target;
     const inputIdValue = $("#carIdInput").val();
@@ -14,3 +13,12 @@ function findById(event, urlHelper) {
         alert("Car with this Id: " + inputIdValue + " was not found");
     });
 };
+
+function GetCreateCarForm(urlToCreateForm) {
+    const createBtn = $("#btn-car-create");
+
+    $.get(urlToCreateForm, function (result) {
+        createBtn.replaceWith(result);
+    })
+}
+

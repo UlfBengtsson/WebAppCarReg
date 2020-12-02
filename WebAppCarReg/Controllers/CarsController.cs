@@ -99,5 +99,11 @@ namespace WebAppCarReg.Controllers
                 return PartialView("_CarPartialView", car);
             }
         }
+
+        [HttpGet]
+        public IActionResult CreateForm()
+        {
+            return PartialView("_CarCreateAjaxPartialView");
+        }
     }
 }

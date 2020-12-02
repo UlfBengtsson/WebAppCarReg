@@ -29,9 +29,8 @@
            asp-controller="Cars"
            asp-action="AjaxFindById"
            data-target="enviroment-container"
-           onclick="findById(event, '@Url.Action("AjaxFindById","Cars")')">Find by id</a>
+           onclick="findById(event)">Find by id</a>
 
         <div id="enviroment-container"></div>
     </div>
 </div>
-<script src="~/js/CarsUtil.js" asp-append-version="true"></script>

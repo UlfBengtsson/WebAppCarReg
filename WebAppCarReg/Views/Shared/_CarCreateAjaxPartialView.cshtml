@@ -1,0 +1,19 @@
+﻿@model CreateCarViewModel
+
+
+<form asp-action="Create" method="post" >
+    <h3>Create</h3>
+    <label asp-for="Brand"></label>
+    <input asp-for="Brand" />
+    <span class="text-danger" asp-validation-for="Brand"></span>
+    <br />
+    <label asp-for="ModelName"></label>
+    <input asp-for="ModelName" />
+    <span class="text-danger" asp-validation-for="ModelName"></span>
+    <br />
+    <label asp-for="Year"></label>
+    <input asp-for="Year" />
+    <span asp-validation-for="Year"></span>
+    <br />
+    <input class="text-danger" type="submit" value="Create" />
+</form>

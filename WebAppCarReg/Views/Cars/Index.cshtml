@@ -10,7 +10,7 @@
     <h3>@ViewBag.msg</h3>
 }
 
-<a asp-action="Create">Add Car to list</a>
+<button onclick="GetCreateCarForm('@Url.Action("CreateForm","Cars")')" id="btn-car-create" >Add Car to list</button>
 
 <div class="row">
     <div class="col-12">
