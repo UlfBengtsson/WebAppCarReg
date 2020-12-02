@@ -1,7 +1,7 @@
 ﻿@model CreateCarViewModel
 
 
-<form asp-action="Create" method="post" >
+<form asp-controller="Cars" asp-action="AjaxCreateForm" onsubmit="PostCreatecarForm(event, this)" >
     <h3>Create</h3>
     <label asp-for="Brand"></label>
     <input asp-for="Brand" />
@@ -15,5 +15,5 @@
     <input asp-for="Year" />
     <span asp-validation-for="Year"></span>
     <br />
-    <input class="text-danger" type="submit" value="Create" />
+    <input class="btn btn-success" type="submit" value="Create" />
 </form>

@@ -105,5 +105,18 @@ namespace WebAppCarReg.Controllers
         {
             return PartialView("_CarCreateAjaxPartialView");
         }
+
+        [HttpPost]
+        public IActionResult AjaxCreateForm(CreateCarViewModel carViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Car car = _carService.Add(carViewModel);
+
+                return PartialView("_CarPartialView", car);
+            }
+
+            return PartialView("_CarCreateAjaxPartialView", carViewModel);
+        }
     }
 }
