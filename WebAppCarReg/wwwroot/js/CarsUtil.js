@@ -1,4 +1,4 @@
-﻿
+﻿var createBtn = null;
 
 function findById(event) {
     event.preventDefault();
@@ -15,7 +15,7 @@ function findById(event) {
 };
 
 function GetCreateCarForm(urlToCreateForm) {
-    const createBtn = $("#btn-car-create");
+    createBtn = $("#btn-car-create");
 
     $.get(urlToCreateForm, function (result) {
         createBtn.replaceWith(result);
@@ -24,21 +24,25 @@ function GetCreateCarForm(urlToCreateForm) {
 
 function PostCreatecarForm(event, createForm) {
     event.preventDefault();
-    console.log("Create Form post:", createForm);
+    //console.log("Create Form post:", createForm);
     event.preventDefault();
 
-    console.log("action url:", createForm.action);
-    console.log("form value brand:", createForm.Brand.value);
-
+    //console.log("action url:", createForm.action);
+    //console.log("form value brand:", createForm.Brand.value);
 
     $.post(createForm.action,
         {
-            Brand: createForm.Brand.value,
+            Brand: createForm["Brand"].value,
             ModelName: createForm.ModelName.value,
             Year: createForm.Year.value
         },
         function (data, status) {
-            alert("Data: " + data + "\nStatus: " + status);
+            $("#carsListDiv").append(data);
+            $("#createCarDiv").html(createBtn); //document.getElementById("createCarDiv").innerHTML = createBtn;
+
+        }).fail(function (badForm) {
+            //console.log("badForm: ", badForm);
+            $("#createCarDiv").html(badForm.responseText);
         });
 
 }

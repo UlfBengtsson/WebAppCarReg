@@ -116,6 +116,7 @@ namespace WebAppCarReg.Controllers
                 return PartialView("_CarPartialView", car);
             }
 
+            Response.StatusCode = 400;
             return PartialView("_CarCreateAjaxPartialView", carViewModel);
         }
     }

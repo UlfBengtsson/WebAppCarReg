@@ -10,10 +10,12 @@
     <h3>@ViewBag.msg</h3>
 }
 
-<button onclick="GetCreateCarForm('@Url.Action("CreateForm","Cars")')" id="btn-car-create" >Add Car to list</button>
+<div class="row" id="createCarDiv">
+    <button onclick="GetCreateCarForm('@Url.Action("CreateForm","Cars")')" id="btn-car-create" >Add Car to list</button>
+</div>
 
 <div class="row">
-    <div class="col-12">
+    <div class="col-12" id="carsListDiv">
         <div class="row">
             <form asp-action="Index" method="post">
                 <h4>Search based on years range</h4>
