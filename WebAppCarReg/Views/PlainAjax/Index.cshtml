@@ -1,5 +1,9 @@
 ﻿<h1>Some exampels</h1>
 
+<input id="numA" type="number" value="0" />
+<input id="numB" type="number" value="0" />
+<button onclick="AjaxCalcPost(event)">calc +</button>
+
 <div id="divToTarget"></div>
 
 <script>
@@ -11,8 +15,8 @@
 
     console.log("CantFindIt");
     $.get("PlainAjax/CantFindIt", function (responseData, statusCode) {
-        console.log("Status Code:", statusCode);
-        console.log("data:", responseData);
+       /* console.log("Status Code:", statusCode);//this will not run becouse of 404 is considerd a fail
+        console.log("data:", responseData);*/
     }).fail(function (responseData, statusCode) {
         console.log("Fail Status Code:", statusCode);
         console.log("Fail data:", responseData);
@@ -23,7 +27,27 @@
         console.log("Status Code:", statusCode);
         console.log("data:", responseData);
     }).fail(function (responseData, statusCode) {
-        console.log("Fail Status Code:", statusCode);
-        console.log("Fail data:", responseData);
+      /*  console.log("Fail Status Code:", statusCode); will sucssed
+        console.log("Fail data:", responseData);*/
     });
+
+    function AjaxCalcPost(event) {
+        //event.preventDefualt();
+
+        console.log("numA:",$("#numA").val());
+        console.log("numB:",$("#numB").val());
+
+        $.post("PlainAjax/CalcAddition",
+            {
+                numberA: $("#numA").val(),
+                numberB: $("#numB").val()
+            },
+            function (responseData, statusCode) {
+                console.log("Status Code:", statusCode);
+                console.log("data:", responseData);
+                $("#divToTarget").text(responseData);
+            }
+        );
+    };
+
 </script>

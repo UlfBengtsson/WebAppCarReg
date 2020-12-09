@@ -29,5 +29,12 @@ namespace WebAppCarReg.Controllers
             Car car = new Car("Saab", "900", 1989);
             return Json(car);
         }
+        
+        [HttpPost]
+        public IActionResult CalcAddition(double numberA, double numberB)
+        {
+            
+            return Ok($"{numberA} + {numberB} = {numberA + numberB}");
+        }
     }
 }
