@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - WebAppCarReg</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -24,6 +25,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Cars" asp-action="Index">Cars list</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="PlainAjax" asp-action="Index">Ajax ex</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -40,7 +44,6 @@
             &copy; 2020 - WebAppCarReg
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/CarsUtil.js" asp-append-version="true"></script>

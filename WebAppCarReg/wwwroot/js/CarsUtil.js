@@ -25,8 +25,6 @@ function GetCreateCarForm(urlToCreateForm) {
 function PostCreatecarForm(event, createForm) {
     event.preventDefault();
     //console.log("Create Form post:", createForm);
-    event.preventDefault();
-
     //console.log("action url:", createForm.action);
     //console.log("form value brand:", createForm.Brand.value);
 

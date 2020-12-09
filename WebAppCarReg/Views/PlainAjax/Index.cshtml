@@ -1,0 +1,29 @@
+﻿<h1>Some exampels</h1>
+
+<div id="divToTarget"></div>
+
+<script>
+    console.log("SimpelText");
+    $.get("PlainAjax/SimpelText", function (responseData, statusCode) {
+        console.log("Status Code:", statusCode);
+        console.log("data:", responseData);
+    });
+
+    console.log("CantFindIt");
+    $.get("PlainAjax/CantFindIt", function (responseData, statusCode) {
+        console.log("Status Code:", statusCode);
+        console.log("data:", responseData);
+    }).fail(function (responseData, statusCode) {
+        console.log("Fail Status Code:", statusCode);
+        console.log("Fail data:", responseData);
+    });
+
+    console.log("GiveMeJSON");
+    $.get("PlainAjax/GiveMeJSON", function (responseData, statusCode) {
+        console.log("Status Code:", statusCode);
+        console.log("data:", responseData);
+    }).fail(function (responseData, statusCode) {
+        console.log("Fail Status Code:", statusCode);
+        console.log("Fail data:", responseData);
+    });
+</script>
