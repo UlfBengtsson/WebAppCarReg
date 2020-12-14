@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using WebAppCarReg.Models;
 using WebAppCarReg.Models.Services;
 using WebAppCarReg.Models.ViewModels;
@@ -11,7 +12,12 @@ namespace WebAppCarReg.Controllers
 {
     public class CarsController : Controller
     {
-        private ICarService _carService = new CarService();
+        private ICarService _carService;
+
+        public CarsController(ICarService carService)
+        {
+            _carService = carService;
+        }
 
         [HttpGet]
         public IActionResult Index()

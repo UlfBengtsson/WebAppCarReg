@@ -12,7 +12,13 @@ namespace WebAppCarReg.Controllers
 {
     public class HomeController : Controller
     {
-        ICarService _carService = new CarService();
+        private ICarService _carService;
+
+        public HomeController(ICarService carService)
+        {
+            _carService = carService;
+        }
+
         public IActionResult Index()
         {
             Car lastCar = null;
