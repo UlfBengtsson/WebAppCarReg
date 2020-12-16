@@ -1,0 +1,44 @@
+﻿@model WebAppCarReg.Models.ViewModels.CreateSaleViewModel
+
+<h4>CreateSaleViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Buyer" class="control-label"></label>
+                <input asp-for="Buyer" class="form-control" />
+                <span asp-validation-for="Buyer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller" class="control-label"></label>
+                <input asp-for="Seller" class="form-control" />
+                <span asp-validation-for="Seller" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car" class="control-label"></label>
+                <select asp-for="Car.Id" class="form-control">
+                    @foreach (var item in Model.CarList)
+                    {
+                    <option value="@item.Id">@item.Brand - @item.ModelName</option>
+                    }
+                </select>
+                <span asp-validation-for="Car" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TransactionDate" class="control-label"></label>
+                <input asp-for="TransactionDate" class="form-control" />
+                <span asp-validation-for="TransactionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

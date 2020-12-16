@@ -14,5 +14,6 @@ namespace WebAppCarReg.Models.Database
 
         //DbSet
         public DbSet<Car> CarList { get; set; }//will be tabels in database
+        public DbSet<Sale> Sales { get; set; }
     }
 }
