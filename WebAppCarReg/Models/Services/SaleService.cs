@@ -20,7 +20,8 @@ namespace WebAppCarReg.Models.Services
 
         public Sale Add(CreateSaleViewModel createSaleViewModel)
         {
-            if (_carService.FindBy(createSaleViewModel.Car.Id) == null)
+            createSaleViewModel.Car = _carService.FindBy(createSaleViewModel.Car.Id);
+            if (createSaleViewModel.Car == null)
             {
                 return null;
             }

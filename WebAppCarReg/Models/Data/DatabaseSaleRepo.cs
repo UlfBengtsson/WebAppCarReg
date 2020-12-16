@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,7 +49,8 @@ namespace WebAppCarReg.Models.Data
 
         public List<Sale> Read()
         {
-            return _carsDbContext.Sales.ToList();
+            //return _carsDbContext.Sales.ToList();//Lazy loading (only sales no car)
+            return _carsDbContext.Sales.Include( s => s.Car).ToList();//Eager loading (sales and cars)
         }
 
         public Sale Read(int id)

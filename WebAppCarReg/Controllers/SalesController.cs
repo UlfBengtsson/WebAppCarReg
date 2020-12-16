@@ -13,10 +13,12 @@ namespace WebAppCarReg.Controllers
     public class SalesController : Controller
     {
         private readonly ISaleService _saleService;
+        private readonly ICarService _carService;
 
-        public SalesController(ISaleService saleService)
+        public SalesController(ISaleService saleService, ICarService carService)
         {
             _saleService = saleService;
+            _carService = carService;
         }
 
         // GET: SalesController
@@ -41,7 +43,9 @@ namespace WebAppCarReg.Controllers
         // GET: SalesController/Create
         public ActionResult Create()
         {
-            return View();
+            CreateSaleViewModel createSaleViewModel = new CreateSaleViewModel();
+            createSaleViewModel.CarList = _carService.All();
+            return View(createSaleViewModel);
         }
 
         // POST: SalesController/Create

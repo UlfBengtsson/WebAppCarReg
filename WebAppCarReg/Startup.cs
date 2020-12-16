@@ -30,9 +30,10 @@ namespace WebAppCarReg
             services.AddDbContext<CarsDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<ICarService, CarService>();//Container setting for my IoC
             //services.AddScoped<ICarsRepo, InMemoryCarRepo>();//Container setting for my IoC
             services.AddScoped<ICarsRepo, DatabaseCarsRepo>();//Container setting for my IoC
+            services.AddScoped<ICarService, CarService>();//Container setting for my IoC
+            
             services.AddScoped<ISaleRepo, DatabaseSaleRepo>();
             services.AddScoped<ISaleService, SaleService>();
 
