@@ -22,14 +22,24 @@ namespace WebAppCarReg.Models.Data
 
             _carsDbContext.CarList.Add(car);
 
-            _carsDbContext.SaveChanges();
+            if (_carsDbContext.SaveChanges() > 0)
+            {
+                return car;
+            }
 
-            return car;
+            return null;
         }
 
         public bool Delete(Car car)
         {
-            throw new NotImplementedException();
+            _carsDbContext.CarList.Remove(car);
+
+            if (_carsDbContext.SaveChanges() > 0)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public List<Car> Read()
@@ -45,7 +55,14 @@ namespace WebAppCarReg.Models.Data
 
         public Car Update(Car car)
         {
-            throw new NotImplementedException();
+            _carsDbContext.CarList.Update(car);
+
+            if (_carsDbContext.SaveChanges() > 0)
+            {
+                return car;
+            }
+
+            return null;
         }
     }
 }
