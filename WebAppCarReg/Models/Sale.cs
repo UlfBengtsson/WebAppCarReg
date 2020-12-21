@@ -12,7 +12,7 @@ namespace WebAppCarReg.Models
         public int Id { get; set; }
 
         [Required]
-        public Car Car { get; set; }
+        public Car Car { get; set; }//One
 
         public string Buyer { get; set; }
 

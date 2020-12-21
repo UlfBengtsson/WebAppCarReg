@@ -30,6 +30,8 @@ namespace WebAppCarReg.Models
             } 
         }
 
+        public List<Sale> SalesHistory { get; set; }//Many
+
         public Car() {}
 
         public Car(string brand, string modelName, int year)

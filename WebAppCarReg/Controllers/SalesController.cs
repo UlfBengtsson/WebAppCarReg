@@ -53,6 +53,7 @@ namespace WebAppCarReg.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateSaleViewModel createSale)
         {
+
             if(ModelState.IsValid)
             {
                 Sale sale = _saleService.Add(createSale);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,7 +39,8 @@ namespace WebAppCarReg.Models.Data
 
         public Car Read(int id)
         {
-            return _carsDbContext.CarList.SingleOrDefault(carList => carList.Id == id);
+            //return _carsDbContext.CarList.SingleOrDefault(carList => carList.Id == id);//Lazy loading, no sales will be loaded
+            return _carsDbContext.CarList.Include( c => c.SalesHistory).SingleOrDefault(carList => carList.Id == id);
         }
 
         public Car Update(Car car)
