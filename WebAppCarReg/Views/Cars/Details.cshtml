@@ -29,7 +29,7 @@
         <ul>
             @foreach (var item in Model.SalesHistory)
             {
-                <li>@item.TransactionDate.ToShortDateString() - @item.Seller sells to @item.Buyer</li>
+                <li>@item.TransactionDate.ToShortDateString() - @item.Seller sells to @item.Buyer</li>@* Comment - here we have both the sales and car id, so if i wanted to remove this sale from the car i have id´s to do it *@
             }
         </ul>
     </div>
