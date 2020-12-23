@@ -74,6 +74,18 @@ namespace WebAppCarReg.Controllers
             return View(carViewModel);
         }
 
+        public IActionResult Details(int id)
+        {
+            Car car = _carService.FindBy(id);
+
+            if (car != null)
+            {
+                return View(car);
+            }
+
+            return RedirectToAction(nameof(Index));//Car was not found
+        }
+
         public IActionResult Delete(int id)
         {
             if (_carService.Remove(id))

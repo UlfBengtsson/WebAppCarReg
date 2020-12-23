@@ -11,6 +11,7 @@
         <p>@Model.Year</p>
     </div>
     <div class="col">
+        <a class="btn btn-info" asp-action="Details" asp-controller="Cars" asp-route-id="@Model.Id">Details</a> | 
         <a class="btn btn-danger" asp-action="Delete" asp-controller="Cars" asp-route-id="@Model.Id">Delete</a>
     </div>
 </div>
