@@ -74,6 +74,18 @@ namespace WebAppCarReg.Controllers
             return View(carViewModel);
         }
 
+        public IActionResult Details(int id)
+        {
+            Car car = _carService.FindBy(id);
+
+            if (car != null)
+            {
+                return View(car);
+            }
+
+            return RedirectToAction(nameof(Index));//Car was not found
+        }
+
         public IActionResult Delete(int id)
         {
             if (_carService.Remove(id))
@@ -90,20 +102,6 @@ namespace WebAppCarReg.Controllers
             indexViewmodel.CarList = _carService.All();
 
             return View("Index", indexViewmodel);
-        }
-
-        public IActionResult Details(int id)
-        {
-            Car car = _carService.FindBy(id);
-
-            if (car == null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                return View(car);
-            }
         }
 
         public IActionResult AjaxFindById(int id)

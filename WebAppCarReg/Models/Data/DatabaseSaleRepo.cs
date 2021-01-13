@@ -55,8 +55,8 @@ namespace WebAppCarReg.Models.Data
 
         public Sale Read(int id)
         {
-            return _carsDbContext.Sales.Find(id);
-            //return _carsDbContext.Sales.SingleOrDefault( s => s.Id == id);
+            //return _carsDbContext.Sales.Find(id);
+            return _carsDbContext.Sales.Include(s => s.Car).SingleOrDefault( s => s.Id == id);
         }
 
         public Sale Update(Sale sale)
