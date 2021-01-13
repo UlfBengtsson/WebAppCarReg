@@ -50,7 +50,7 @@ namespace WebAppCarReg.Models.Data
         public Car Read(int id)
         {
             //return _carsDbContext.CarList.SingleOrDefault(carList => carList.Id == id);//Lazy loading, no sales will be loaded
-            return _carsDbContext.CarList.Include( c => c.SalesHistory).SingleOrDefault(carList => carList.Id == id);
+            return _carsDbContext.CarList.Include( c => c.SalesHistory).Include( c => c.Insurances ).ThenInclude( c => c.Insurance ).SingleOrDefault(carList => carList.Id == id);
         }
 
         public Car Update(Car car)

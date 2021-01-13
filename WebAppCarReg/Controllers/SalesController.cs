@@ -54,7 +54,7 @@ namespace WebAppCarReg.Controllers
         public ActionResult Create(CreateSaleViewModel createSale)
         {
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 Sale sale = _saleService.Add(createSale);
 
@@ -63,7 +63,7 @@ namespace WebAppCarReg.Controllers
                     ModelState.AddModelError("msg", "Database problems");
                     return View(createSale);
                 }
-                
+
                 return RedirectToAction(nameof(Index));
             }
             else
@@ -75,22 +75,35 @@ namespace WebAppCarReg.Controllers
         // GET: SalesController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Sale sale = _saleService.FindBy(id);
+
+            if (sale == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(new CreateSaleViewModel(sale));
         }
 
         // POST: SalesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, CreateSaleViewModel editSale)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                Sale sale = _saleService.Edit(id, editSale);
+
+                if (sale != null)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                ModelState.AddModelError("msg", "Database problems");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(editSale);
+
         }
 
         // GET: SalesController/Delete/5

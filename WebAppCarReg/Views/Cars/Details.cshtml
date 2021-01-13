@@ -1,0 +1,54 @@
+﻿@model Car
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details for @Model.ModelName</h1>
+
+<h3>Brand: @Model.Brand</h3>
+<h3>Year: @Model.Year</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Insurances</th>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CarInsurance item in Model.Insurances)
+        {
+            <tr>
+                <td>@item.Insurance.Name</td>
+                <td>@item.Insurance.Price</td>
+            </tr>
+        }
+    </tbody>
+    
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>Sales History</th>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <th>Seller</th>
+            <th>Buyer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Sale item in Model.SalesHistory)
+        {
+            <tr>
+                <td>@item.TransactionDate.ToShortDateString()</td>
+                <td>@item.Seller</td>
+                <td>@item.Buyer</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -31,6 +31,7 @@ namespace WebAppCarReg.Models
         }
 
         public List<Sale> SalesHistory { get; set; }//Many
+        public List<CarInsurance> Insurances { get; set; }//Many
 
         public Car() {}
 

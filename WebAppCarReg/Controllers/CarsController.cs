@@ -92,6 +92,20 @@ namespace WebAppCarReg.Controllers
             return View("Index", indexViewmodel);
         }
 
+        public IActionResult Details(int id)
+        {
+            Car car = _carService.FindBy(id);
+
+            if (car == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(car);
+            }
+        }
+
         public IActionResult AjaxFindById(int id)
         {
             Car car = _carService.FindBy(id);
