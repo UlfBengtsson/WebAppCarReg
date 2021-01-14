@@ -20,5 +20,17 @@ namespace WebAppCarReg.Models
         [Display(Name = "Production Year")]
         [Range(1886, 2025)]
         public int Year { get; set; }
+
+        public List<CarInsurance> Insurances { get; set; }
+
+        public CreateCarViewModel() { }
+
+        public CreateCarViewModel(Car car)
+        {
+            ModelName = car.ModelName;
+            Brand = car.Brand;
+            Year = car.Year;
+            Insurances = car.Insurances;
+        }
     }
 }

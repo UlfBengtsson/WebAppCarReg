@@ -36,6 +36,9 @@ namespace WebAppCarReg
             
             services.AddScoped<ISaleRepo, DatabaseSaleRepo>();
             services.AddScoped<ISaleService, SaleService>();
+            
+            services.AddScoped<IInsuranceRepo, DatabaseInsurancesRepo>();
+            services.AddScoped<IInsuranceService, InsuranceService>();
 
             services.AddMvc();
         }

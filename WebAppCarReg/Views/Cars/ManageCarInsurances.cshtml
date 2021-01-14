@@ -1,0 +1,68 @@
+﻿@model SubscribeInsuranceViewModel
+@{
+    ViewData["Title"] = "ManageCarInsurances";
+}
+
+<h1>Manage Car Insurances</h1>
+
+<div class="row">
+    <div class="col-3">
+        <div class="row">
+            <h3>Brand:</h3>
+            <h3>Model:</h3>
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="row">@Model.Brand</div>
+        <div class="row">@Model.Name</div>
+    </div>
+</div>
+<div class="row">
+    <a asp-action="Details" asp-route-id="@Model.Id">Back to details</a>
+</div>
+<div class="row">
+    <div class="col">
+        <h3>Current active insurances for car</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (CarInsurance item in Model.CurrentInsurances)
+                {
+                    <tr>
+                        <td>@item.Insurance.Name</td>
+                        <td>@item.Insurance.Price</td>
+                        <td>@Html.ActionLink("Remove", "RemoveCarInsurance", "Cars", new { carId = Model.Id, insurId = item.Insurance.Id })</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col">
+        <h3>Add insurances to car</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Insurance item in Model.SelectebleInsurances)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Price</td>
+                        <td>@Html.ActionLink("Add", "AddCarInsurance", "Cars", new { carId = Model.Id, insurId = item.Id })</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

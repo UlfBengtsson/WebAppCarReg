@@ -27,7 +27,13 @@ namespace WebAppCarReg.Models.Services
 
         public Car Edit(int id, CreateCarViewModel car)
         {
-            Car editedCar = new Car() { Id = id, Brand = car.Brand, ModelName = car.ModelName, Year = car.Year };
+
+            Car editedCar = FindBy(id);
+            editedCar.ModelName = car.ModelName;
+            editedCar.Brand = car.Brand;
+            editedCar.Year = car.Year;
+            editedCar.Insurances = car.Insurances;
+
             return _carsRepo.Update(editedCar);
         }
 

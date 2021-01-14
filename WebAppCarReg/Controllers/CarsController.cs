@@ -12,11 +12,13 @@ namespace WebAppCarReg.Controllers
 {
     public class CarsController : Controller
     {
-        private ICarService _carService;
+        private readonly ICarService _carService;
+        private readonly IInsuranceService _insuranceService;
 
-        public CarsController(ICarService carService)
+        public CarsController(ICarService carService, IInsuranceService insuranceService)
         {
             _carService = carService;
+            _insuranceService = insuranceService;
         }
 
         [HttpGet]
@@ -103,6 +105,63 @@ namespace WebAppCarReg.Controllers
 
             return View("Index", indexViewmodel);
         }
+
+        [HttpGet]
+        public IActionResult ManageCarInsurances(int id)
+        {
+            Car car = _carService.FindBy(id);
+
+            if (car != null)
+            {
+                SubscribeInsuranceViewModel subscribeInsuranceViewModel 
+                    = new SubscribeInsuranceViewModel(car, _insuranceService.All());
+                return View(subscribeInsuranceViewModel);
+            }
+
+            return RedirectToAction(nameof(Index));//Car was not found
+        }
+
+        [HttpGet]
+        public IActionResult AddCarInsurance(int carId, int insurId)
+        {
+            Car car = _carService.FindBy(carId);
+
+            if (car != null)
+            {
+                Insurance insurance = _insuranceService.FindBy(insurId);
+                if (insurance != null)
+                {
+                    car.Insurances.Add(new CarInsurance() { CarId = carId, InsuranceId = insurId });
+                    _carService.Edit(carId, new CreateCarViewModel(car));
+                }
+                return RedirectToAction(nameof(ManageCarInsurances), new { id = carId });
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult RemoveCarInsurance(int carId, int insurId)
+        {
+            Car car = _carService.FindBy(carId);
+
+            if (car != null)
+            {
+                foreach (var item in car.Insurances)
+                {
+                    if (item.InsuranceId == insurId)
+                    {
+                        car.Insurances.Remove(item);
+                        _carService.Edit(carId, new CreateCarViewModel(car));
+                        break;
+                    }
+                }
+                
+                return RedirectToAction(nameof(ManageCarInsurances), new { id = carId });
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        //----------------- Ajax --------------------------------------
 
         public IActionResult AjaxFindById(int id)
         {

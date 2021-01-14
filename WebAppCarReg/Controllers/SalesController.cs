@@ -22,8 +22,13 @@ namespace WebAppCarReg.Controllers
         }
 
         // GET: SalesController
-        public ActionResult Index()
+        public ActionResult Index(string msg = null)
         {
+            if (msg != null)
+            {
+                ViewBag.Msg = msg;
+            }
+
             return View(_saleService.All());
         }
 
@@ -88,7 +93,7 @@ namespace WebAppCarReg.Controllers
         // POST: SalesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, CreateSaleViewModel editSale)
+        public IActionResult Edit(int id, CreateSaleViewModel editSale)
         {
             if (ModelState.IsValid)
             {
@@ -109,22 +114,31 @@ namespace WebAppCarReg.Controllers
         // GET: SalesController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Sale sale = _saleService.FindBy(id);
+
+            if (sale == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(sale);
         }
 
         // POST: SalesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Sale sale)
         {
-            try
+            
+            if (id == sale.Id && _saleService.Remove(id))
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { msg = "Delete success." });
             }
-            catch
+            else
             {
-                return View();
+                return RedirectToAction("Index", new { msg = "Failed to delete." });
             }
+
         }
     }
 }
