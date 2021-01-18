@@ -9,9 +9,9 @@ namespace WebAppCarReg.Models.Data
 {
     public class DatabaseCarsRepo : ICarsRepo
     {
-        private readonly CarsDbContext _carsDbContext;
+        private readonly IdentityCarDbContext _carsDbContext;
 
-        public DatabaseCarsRepo(CarsDbContext carsDbContext)
+        public DatabaseCarsRepo(IdentityCarDbContext carsDbContext)
         {
             _carsDbContext = carsDbContext;
         }

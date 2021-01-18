@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+@if (ViewBag.Msg != null)
+{
+<h3 style="color: red">@ViewBag.Msg</h3>
+}
+
+<form asp-action="Login" method="post">
+    <input type="text" name="userName" value="" />
+    <input type="password" name="password" value="" />
+
+    <input type="submit" value="login" class="btn btn-primary" />
+</form>

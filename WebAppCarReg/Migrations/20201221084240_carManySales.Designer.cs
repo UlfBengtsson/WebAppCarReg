@@ -9,7 +9,7 @@ using WebAppCarReg.Models.Database;
 
 namespace WebAppCarReg.Migrations
 {
-    [DbContext(typeof(CarsDbContext))]
+    [DbContext(typeof(IdentityCarDbContext))]
     [Migration("20201221084240_carManySales")]
     partial class carManySales
     {

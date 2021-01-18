@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebAppCarReg.Models.Data;
 using WebAppCarReg.Models.Database;
+using WebAppCarReg.Models.Identity;
 using WebAppCarReg.Models.Services;
 
 namespace WebAppCarReg
@@ -27,7 +29,11 @@ namespace WebAppCarReg
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CarsDbContext>(options => 
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityCarDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddDbContext<IdentityCarDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             //services.AddScoped<ICarsRepo, InMemoryCarRepo>();//Container setting for my IoC
@@ -59,6 +65,9 @@ namespace WebAppCarReg
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();//User login?
+            app.UseAuthorization();//User has role?
 
             app.UseEndpoints(endpoints =>
             {

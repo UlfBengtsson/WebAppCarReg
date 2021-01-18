@@ -8,7 +8,7 @@ using WebAppCarReg.Models.Database;
 
 namespace WebAppCarReg.Migrations
 {
-    [DbContext(typeof(CarsDbContext))]
+    [DbContext(typeof(IdentityCarDbContext))]
     [Migration("20201214112156_InitialCreate")]
     partial class InitialCreate
     {

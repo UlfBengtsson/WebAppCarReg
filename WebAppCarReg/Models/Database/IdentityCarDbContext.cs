@@ -1,16 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using WebAppCarReg.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebAppCarReg.Models.Database
 {
-    public class CarsDbContext : DbContext
+    public class IdentityCarDbContext : IdentityDbContext<AppUser>
     {
-        //ctor
-        public CarsDbContext(DbContextOptions<CarsDbContext> options) : base(options)
-        { }
+        public IdentityCarDbContext(DbContextOptions<IdentityCarDbContext> options) : base(options) { }
 
         //DbSet
         public DbSet<Car> CarList { get; set; }//will be tabels in database
@@ -20,8 +20,11 @@ namespace WebAppCarReg.Models.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)//tells EF how to work with the many-to-many
         {
+
+            base.OnModelCreating(modelBuilder);//Don´t forget this one! otherwise you will get a IdentityUser has no Key error.
+
             modelBuilder.Entity<CarInsurance>()
-                .HasKey(ci => new { ci.CarId, ci.InsuranceId });
+            .HasKey(ci => new { ci.CarId, ci.InsuranceId });
 
             modelBuilder.Entity<CarInsurance>()
                 .HasOne(ci => ci.Car)
