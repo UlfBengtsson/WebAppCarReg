@@ -1,4 +1,4 @@
-﻿
+﻿@model IdentityCreateViewModel
 @{
     ViewData["Title"] = "SignUp";
 }
@@ -11,8 +11,15 @@
 }
 
 <form asp-action="SignUp" method="post">
-    <input type="text" name="userName" value="" />
-    <input type="password" name="password" value="" />
+    <label asp-for="UserName"></label>
+    <input asp-for="UserName" />
+    <span class="text-danger" asp-validation-for="UserName"></span>
+    <label asp-for="Password"></label>
+    <input asp-for="Password" />
+    <span class="text-danger" asp-validation-for="Password"></span>
+    <label asp-for="ControlPassword"></label>
+    <input asp-for="ControlPassword" />
+    <span class="text-danger" asp-validation-for="ControlPassword"></span>
 
     <input type="submit" value="Sign Up" class="btn btn-primary" />
 </form>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WebAppCarReg.Models.Database;
 
 namespace WebAppCarReg
 {
@@ -13,7 +14,9 @@ namespace WebAppCarReg
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();//create our host app
+            host = SeedDatabase.CreateDatabaseIfNotExists(host);// seed if needed
+            host.Run();// run our app/webserver
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

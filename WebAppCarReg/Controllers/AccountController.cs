@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAppCarReg.Models.Identity;
+using WebAppCarReg.Models.ViewModels;
 
 namespace WebAppCarReg.Controllers
 {
@@ -32,20 +33,24 @@ namespace WebAppCarReg.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(string userName, string password)
+        public async Task<IActionResult> Login(IdentityLoginViewModel identityLogin)
         {
 
-            var result = await _signInManager.PasswordSignInAsync(userName, password, false, false);// username,password,presistlogin,lockout
-
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index","Home");
+                var result = await _signInManager.PasswordSignInAsync(identityLogin.UserName, identityLogin.Password, false, false);// username,password,presistlogin,lockout
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                /*if (result.IsLockedOut)
+                {
+
+                }*/
+                ViewBag.Msg = "Failed to login.";
             }
-            /*if (result.IsLockedOut)
-            {
-
-            }*/
-            ViewBag.Msg = "Failed to login.";
+            
 
             return View();
         }
@@ -60,20 +65,32 @@ namespace WebAppCarReg.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignUp(string userName, string password)
+        public async Task<IActionResult> SignUp(IdentityCreateViewModel identityCreate)
         {
-            AppUser appUser = new AppUser();
-            appUser.UserName = userName;
-            var result = await _userManager.CreateAsync(appUser, password);
-
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Login");
+                AppUser appUser = new AppUser();
+                appUser.UserName = identityCreate.UserName;
+                var result = await _userManager.CreateAsync(appUser, identityCreate.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                ViewBag.Msg = "Failed to sign up.";
             }
-
-            ViewBag.Msg = "Failed to sign up.";
-
-            return View();
+            
+            return View(identityCreate);
         }
+
+        //[Authorize] not needed here becouse the controller is set to demand this
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        //change Password/Username .....
     }
 }
