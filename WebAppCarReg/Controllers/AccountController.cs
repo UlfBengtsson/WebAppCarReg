@@ -91,6 +91,11 @@ namespace WebAppCarReg.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         //change Password/Username .....
     }
 }

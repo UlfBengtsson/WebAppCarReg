@@ -43,8 +43,7 @@ namespace WebAppCarReg.Models.Database
                 }
                 catch (Exception e)
                 {
-
-                    throw;
+                    Console.WriteLine(e);
                 }
 
                 return host;
