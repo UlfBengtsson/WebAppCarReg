@@ -59,12 +59,12 @@ namespace WebAppCarReg.Controllers
 
         // POST api/<ReactController>
         [HttpPost]
-        public IActionResult Post( CreateCarViewModel createCarViewModel)
+        public IActionResult Post(CreateCarViewModel createCarViewModel)
         {
             if (ModelState.IsValid)
             {
                 Car car = _carService.Add(createCarViewModel);
-                return Created("URI to car omitted",car);
+                return Created("URI to car omitted", car);
             }
 
             return BadRequest(createCarViewModel);
@@ -77,10 +77,10 @@ namespace WebAppCarReg.Controllers
             if (ModelState.IsValid)
             {
                 Car car = _carService.Edit(id, carViewModel);
-                
+
                 if (car == null)
                 {
-                    return Problem("Unable to save changes.", null, 500);             
+                    return Problem("Unable to save changes.", null, 500);
                 }
                 return Ok(car);
             }
@@ -94,10 +94,10 @@ namespace WebAppCarReg.Controllers
         {
             if (_carService.Remove(id))
             {
-                return BadRequest();
+                return Ok();
             }
+            return BadRequest();
 
-            return Ok();
         }
     }
 }
